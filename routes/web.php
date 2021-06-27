@@ -33,6 +33,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('create-blog', [BlogController::class, 'createBlog'])->name('createBlog');
     Route::post('storeBlog', [BlogController::class, 'store'])->name('storeBlog');
     Route::get('details/{id}', [BlogController::class, 'show'])->name('productDetails');
+    Route::get('my-blogs', [BlogController::class, 'userBlogs'])->name('userBlogs');
+    Route::get('update-blog/{id}', [BlogController::class, 'updateBlog'])->name('updateBlog');
+    Route::put('update/{id}', [BlogController::class, 'update'])->name('update');
+    Route::delete('delete/{id}', [BlogController::class, 'delete'])->name('deleteBlog');
 
 
 });

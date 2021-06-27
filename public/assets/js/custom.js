@@ -90,3 +90,11 @@ jQuery( document ).ready(function( $ ) {
         }
  
 });
+
+function confirmDelete(){
+    let form=document.querySelector('#delete-form');
+    if(confirm('Are you really want delete this item')){
+        form.submit();
+    }
+    
+}
