@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Request\LoginRequest;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Request\RegisterRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +25,10 @@ class AuthController extends Controller
     public function loginView()
     {
         if (Auth::user()) {
-             return redirect()->route('welcome', app()->getLocale());
+            return redirect()->route('welcome', app()->getLocale());
         } else {
-              return view('auth.login');
-         }
+            return view('auth.login');
+        }
     }
 
     public function loginFrontend()
@@ -47,14 +47,11 @@ class AuthController extends Controller
     public function registerFrontend()
     {
         if (Auth::user()) {
-            return redirect(route('welcome', app()->getLocale()));
+            return redirect()->route('welcome', app()->getLocale());
         } else {
-            if (Auth::user()) {
-                return redirect()->route('welcome', app()->getLocale());
-            } else {
-                return view('auth.register');
-            }
+            return view('auth.signup');
         }
+
     }
 
     /**
@@ -76,64 +73,27 @@ class AuthController extends Controller
             ]);
             throw $error;
         }
-    
-            return redirect()->route('welcome');
+
+        return redirect()->route('welcome');
     }
 
-    // Facebook Sociallite
-    public function facebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
 
-    public function facebookredirect()
+    public function register(RegisterRequest $request)
     {
-        $user = Socialite::driver('facebook')->stateless()->user() ?? null;
-        if ($user) {
-            $user = User::firstOrCreate([
-                'email' => $user->email
-            ], [
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => Hash::make(Str::random(24)),
-                'status' => 1
-            ]);
-            Auth::login($user);
-        }
-        return redirect(route('welcome', app()->getLocale()));
-    }
-
-    // Google Sociallite
-    public function google()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function googleredirect()
-    {
-
-        $user = Socialite::driver('google')->user();
-        $user = User::firstOrCreate([
-            'email' => $user->email
-        ], [
-            'name' => $user->name,
-            'email' => $user->email,
-            'password' => Hash::make(Str::random(24)),
-            'status' => 1
+        $model = User::create([
+            'name' => $request['first_name'] . ' ' . $request['last_name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
-        Auth::login($user);
-        return redirect(route('welcome', app()->getLocale()));
-    }
 
-    public function register($locale, RegisterRequest $request)
-    {
-        $data = $request->only([
-            'first_name',
-            'last_name',
-            'email',
-            'password',
+        $model->profile()->create([
+            'user_id' => $model->id,
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'country' => $request['country'],
+            'phone' => ''
         ]);
-        $this->service->store($locale, $data);
+
         return redirect(route('welcome', app()->getLocale()));
 
     }

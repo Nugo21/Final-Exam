@@ -11,7 +11,7 @@
                 <a class="nav-link" href="{{route('welcome')}}">Home
                   <span class="sr-only">(current)</span>
                 </a>
-              </li> 
+              </li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="blog.html">Blog Entries</a>
               </li> -->
@@ -20,7 +20,7 @@
                 <a class="nav-link" href="{{route('login-view')}}">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Sign Up</a>
+                <a class="nav-link" href="{{route('registerView')}}">Sign Up</a>
               </li>
               @else
               <li class="nav-item">
@@ -30,7 +30,7 @@
                 <a class="nav-link" href="{{route('userBlogs')}}">My Blogs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">My Profile</a>
+                <a class="nav-link" href="{{route('myProfile')}}">My Profile</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('logout')}}">Log Out</a>

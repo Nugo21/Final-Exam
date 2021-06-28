@@ -62,7 +62,7 @@ class BlogController extends Controller
     public function update(BlogRequest $request, $id)
     {
 
-        $post = Post::find($id);
+        $post = Post::where(['id' => $id, 'user_id' => auth()->user()->id])->first();
 
         $model = $post->update([
             'category_id' => $request['category'],

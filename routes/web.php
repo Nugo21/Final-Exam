@@ -26,6 +26,8 @@ Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('login', [AuthController::class, 'loginView'])->name('login-view');
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::get('register-view', [AuthController::class, 'registerFrontend'])->name('registerView');
+Route::post('register', [AuthController::class, 'register'])->name('register');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -37,7 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('update-blog/{id}', [BlogController::class, 'updateBlog'])->name('updateBlog');
     Route::put('update/{id}', [BlogController::class, 'update'])->name('update');
     Route::delete('delete/{id}', [BlogController::class, 'delete'])->name('deleteBlog');
-    Route::delete('my-profile', [HomeController::class, 'profile'])->name('myProfile');
+    Route::get('my-profile', [HomeController::class, 'profile'])->name('myProfile');
+    Route::post('update-profile', [HomeController::class, 'updateProfile'])->name('updateProfile');
 
 
 });
