@@ -16,7 +16,7 @@
         </div>
       </section>
     </div>
-    
+
     <!-- Banner Ends Here -->
 
 
@@ -47,7 +47,7 @@
                        </div>
                       <div class="post-options">
                         <div class="row">
-                    
+
                           <div class="col-6">
                             <ul class="post-share">
                               <li><i class="fa fa-share-alt"></i></li>
@@ -98,7 +98,7 @@
                     <div class="content">
                       <ul>
                         @foreach($categories as $category)
-                        <li><a href="#">- {{$category->title}}</a></li>
+                        <li><a href="{{route('categoryBlogs',$category->id)}}">- {{$category->title}}</a></li>
                         @endforeach
                       </ul>
                     </div>

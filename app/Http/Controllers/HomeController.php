@@ -19,7 +19,7 @@ class HomeController extends Controller
 
         return view('pages.home.index',
             [
-                'latestPosts' => $latestPosts,
+                'lastPosts' => $latestPosts,
                 'categories' => $categories,
                 'sliderPosts' => $sliderPosts
             ]);
@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function profile()
     {
-        $user=User::find(auth()->user()->id);
+        $user = User::find(auth()->user()->id);
         return view('pages.profile.index', [
             'user' => $user
         ]);

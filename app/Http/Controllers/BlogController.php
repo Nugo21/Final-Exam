@@ -95,11 +95,9 @@ class BlogController extends Controller
     {
 
         $post = Post::find($id);
-        $latestPosts = Post::orderBy('created_at', 'desc')->take(10)->get();
         $categories = Category::all();
         return view('pages.blog.details', [
             'post' => $post,
-            'latestPosts' => $latestPosts,
             'categories' => $categories,
         ]);
     }
@@ -107,12 +105,10 @@ class BlogController extends Controller
     public function userBlogs()
     {
         $posts = Post::where(['user_id' => auth()->user()->id])->paginate(10);
-        $latestPosts = Post::orderBy('created_at', 'desc')->take(10)->get();
         $categories = Category::all();
         return view('pages.blog.my-blog',
             [
                 'posts' => $posts,
-                'latestPosts' => $latestPosts,
                 'categories' => $categories,
             ]);
     }
@@ -125,6 +121,23 @@ class BlogController extends Controller
             Storage::delete('public/images/' . $post->id . '/' . $post->image_path);
         }
         return redirect()->route('welcome')->with('success', 'Blog was successfully deleted');
+    }
+
+    public function getBlogsByCategory($id)
+    {
+        $posts = Post::where(['category_id' => $id])->paginate(10);
+        $categories = Category::all();
+        $category = Category::find($id);
+        $categoryName = null;
+        if ($category) {
+            $categoryName = $category->title;
+        }
+
+        return view('pages.blog.category-blog', [
+            'posts' => $posts,
+            'categories' => $categories,
+            'categoryName' => $categoryName
+        ]);
     }
 
 }

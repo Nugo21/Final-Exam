@@ -57,7 +57,7 @@
           <div class="col-lg-8">
             <div class="all-blog-posts">
               <div class="row">
-                @foreach($latestPosts as $post)
+                @foreach($lastPosts as $post)
                 <div class="col-lg-12">
                   <div class="blog-post">
                     <div class="blog-thumb">
@@ -71,10 +71,10 @@
                         <li><a href="#">{{$post->created_at}}</a></li>
                       </ul>
                       <p class="p"> {{$post->description}}</p>
-  
+
                       <div class="post-options">
                         <div class="row">
-                        
+
                           <div class="col-6">
                             <ul class="post-share">
                               <li><i class="fa fa-share-alt"></i></li>
@@ -88,7 +88,7 @@
                   </div>
                 </div>
                 @endforeach
-                {{$latestPosts->links()}}
+                {{$lastPosts->links()}}
 
               </div>
             </div>
@@ -128,7 +128,7 @@
                     <div class="content">
                       <ul>
                         @foreach($categories as $category)
-                        <li><a href="#">- {{$category->title}}</a></li>
+                        <li><a href="{{route('categoryBlogs',$category->id)}}">- {{$category->title}}</a></li>
                         @endforeach
                       </ul>
                     </div>

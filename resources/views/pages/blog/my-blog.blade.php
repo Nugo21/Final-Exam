@@ -15,7 +15,7 @@
         </div>
       </section>
     </div>
-    
+
     <!-- Banner Ends Here -->
 
 
@@ -43,7 +43,7 @@
                         <li><a href="#">{{$post->created_at}}</a></li>
                       </ul>
                                <p class="p">{{$post->description}}</p>
-                    
+
                       <div class="post-options">
                         <div class="row">
                           <div class="col-lg-12">
@@ -103,7 +103,7 @@
                     <div class="content">
                       <ul>
                       @foreach($categories as $category)
-                        <li><a href="#">- {{$category->title}}</a></li>
+                        <li><a href="{{route('categoryBlogs',$category->id)}}">- {{$category->title}}</a></li>
                         @endforeach
                       </ul>
                     </div>
