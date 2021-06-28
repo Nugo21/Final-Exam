@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('update-blog/{id}', [BlogController::class, 'updateBlog'])->name('updateBlog');
     Route::put('update/{id}', [BlogController::class, 'update'])->name('update');
     Route::delete('delete/{id}', [BlogController::class, 'delete'])->name('deleteBlog');
+    Route::delete('my-profile', [HomeController::class, 'profile'])->name('myProfile');
 
 
 });

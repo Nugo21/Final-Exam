@@ -17,15 +17,15 @@ class Post extends Model
     ];
 
     protected $table='blogs';
-    
+
     public function user()
     {
-        return $this->belongsTo('App\Models\user', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
-    
+
     public function category()
     {
-        return $this->belongsTo('App\Models\category', 'category_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
 
     public function files()
